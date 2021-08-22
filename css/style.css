@@ -13,10 +13,9 @@ html {
 canvas {
   border-width: 30px;
   border-style: groove;
-  
   border-color: goldenrod;
   position: absolute;
-  top: 150px;
+  top: 50px;
   bottom: 0;
   left: 0;
   right: 0;

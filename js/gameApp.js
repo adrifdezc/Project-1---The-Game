@@ -35,6 +35,7 @@ const scubaDivingApp = {
 
   refreshScreen() {
     this.checkCollision();
+    this.checkForBottles();
     this.clearCanvas();
     this.drawAll();
     this.framesCounter++;
@@ -47,7 +48,7 @@ const scubaDivingApp = {
     if (this.framesCounter % 1000 === 0) {
       this.createNewLive();
     }
-    if (this.framesCounter % 500 === 0) {
+    if (this.framesCounter % 200 === 0) {
       this.o2Reserve--;
     }
 
@@ -77,11 +78,11 @@ const scubaDivingApp = {
     const yRandomPosition = Math.trunc(Math.random() * this.dimensionCanvas.h);
     const newObstacle = new Obstacle(
       this.ctx,
-      100,
-      80,
+      85,
+      70,
       this.dimensionCanvas,
       yRandomPosition,
-      this.speed
+      this.speed / 1.5
     );
     this.obstaclesArray.push(newObstacle);
   },
@@ -90,11 +91,11 @@ const scubaDivingApp = {
     const xRandomPosition = Math.trunc(Math.random() * this.dimensionCanvas.w);
     const newLive = new Live(
       this.ctx,
-      70,
-      59,
+      100,
+      80,
       this.dimensionCanvas,
       xRandomPosition,
-      this.speed
+      this.speed / 2
     );
     this.livesArray.push(newLive);
   },
@@ -123,15 +124,15 @@ const scubaDivingApp = {
         danger.draw();
         let frontalCollision =
           this.newPlayer.playerPosition.x <
-          danger.obstaclePosition.x + danger.obstacleWidth - 10;
+          danger.obstaclePosition.x + danger.obstacleWidth - 20;
         let upperCollision =
-          this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 >
+          this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 20 >
           danger.obstaclePosition.x;
         let downCollision =
           this.newPlayer.playerPosition.y <
-          danger.obstaclePosition.y + danger.obstacleHeight - 10;
+          danger.obstaclePosition.y + danger.obstacleHeight - 20;
         let backCollision =
-          this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y >
+          this.newPlayer.playerHeight - 20 + this.newPlayer.playerPosition.y >
           danger.obstaclePosition.y;
 
         if (
@@ -142,6 +143,36 @@ const scubaDivingApp = {
         ) {
           alert("Game Over"); //SOMETHING NICE HERE
           cancelAnimationFrame();
+        }
+      });
+    }
+  },
+
+  checkForBottles() {
+    if (this.livesArray.length) {
+      this.livesArray.forEach((life) => {
+        life.draw();
+        let frontalCollision =
+          this.newPlayer.playerPosition.x <
+          life.livePosition.x + life.liveWidth - 10;
+        let upperCollision =
+          this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 >
+          life.livePosition.x;
+        let downCollision =
+          this.newPlayer.playerPosition.y <
+          life.livePosition.y + life.liveHeight - 10;
+        let backCollision =
+          this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y >
+          life.livePosition.y;
+
+        if (
+          frontalCollision &&
+          upperCollision &&
+          downCollision &&
+          backCollision
+        ) {
+          this.livesArray.splice(0, 1);
+          this.o2Reserve += 5;
         }
       });
     }
