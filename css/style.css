@@ -1,0 +1,24 @@
+*{
+    margin:0;
+    padding: 0;
+}
+html { 
+    background: url('/css/slotopaint-gamedesign-mermaid3.jpeg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+canvas {
+  border-width: 30px;
+  border-style: groove;
+  
+  border-color: goldenrod;
+  position: absolute;
+  top: 150px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
