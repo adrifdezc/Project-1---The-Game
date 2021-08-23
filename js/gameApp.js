@@ -1,5 +1,4 @@
 const scubaDivingApp = {
-  //2.Declarando atributos como indefinido para visualizar la informacion de raceCarApp
   ctx: undefined,
   dimensionCanvas: { w: undefined, h: undefined },
   backgroundImage: undefined,
@@ -12,7 +11,6 @@ const scubaDivingApp = {
   o2Reserve: 10,
 
   init(elementCanvas) {
-    //add 2d
     this.setContext(elementCanvas);
     this.setDimensions(elementCanvas);
     this.backgroundImage = new Image();
@@ -34,10 +32,13 @@ const scubaDivingApp = {
   },
 
   refreshScreen() {
+    this.createNewTreasure();
     this.checkCollision();
     this.checkForBottles();
+    this.disappearTresure();
     this.clearCanvas();
     this.drawAll();
+
     this.framesCounter++;
     if (this.framesCounter % 200 === 0) {
       this.score++;
@@ -100,6 +101,17 @@ const scubaDivingApp = {
     this.livesArray.push(newLive);
   },
 
+  createNewTreasure() {
+    this.newTreasure = new Treasure(
+      this.ctx,
+      100,
+      100,
+      this.dimensionCanvas,
+      880,
+      200
+    );
+  },
+
   drawAll() {
     this.ctx.drawImage(
       this.backgroundImage,
@@ -108,7 +120,10 @@ const scubaDivingApp = {
       this.dimensionCanvas.w,
       this.dimensionCanvas.h
     );
+
     this.newPlayer.draw();
+    this.appearTreasure();
+    // this.newTreasure.draw();
     this.obstaclesArray.forEach((obstacle) => obstacle.draw());
     this.livesArray.forEach((live) => live.draw());
     this.showScores();
@@ -141,7 +156,7 @@ const scubaDivingApp = {
           downCollision &&
           backCollision
         ) {
-          alert("Game Over"); //SOMETHING NICE HERE
+          // alert("Game Over"); //SOMETHING NICE HERE
           cancelAnimationFrame();
         }
       });
@@ -175,6 +190,30 @@ const scubaDivingApp = {
           this.o2Reserve += 5;
         }
       });
+    }
+  },
+
+  appearTreasure() {
+    if (this.score > 20) {
+      this.newTreasure.draw();
+    }
+  },
+
+  disappearTresure() {
+    let frontalCollision =
+      this.newPlayer.playerPosition.x <
+      900 + this.newTreasure.treasureWidth - 10;
+    let upperCollision =
+      this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 > 900;
+    let downCollision =
+      this.newPlayer.playerPosition.y <
+      200 + this.newTreasure.treasureHeight - 10;
+    let backCollision =
+      this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y > 200;
+
+    if (frontalCollision && upperCollision && downCollision && backCollision) {
+      alert("You found the treasure");
+      cancelAnimationFrame();
     }
   },
 
