@@ -6,6 +6,7 @@ const scubaDivingApp = {
   framesCounter: 0,
   obstaclesArray: [],
   livesArray: [],
+  bubblesArray: [],
   speed: 3,
   score: 0,
   o2Reserve: 10,
@@ -32,6 +33,7 @@ const scubaDivingApp = {
   },
 
   refreshScreen() {
+    
     this.createNewTreasure();
     this.checkCollision();
     this.checkForBottles();
@@ -46,6 +48,9 @@ const scubaDivingApp = {
     }
     if (this.framesCounter % 80 === 0) {
       this.createNewObstacle();
+    }
+    if (this.framesCounter % 10 === 0) {
+      this.createNewBubble();
     }
     if (this.framesCounter % 1000 === 0) {
       this.createNewLive();
@@ -89,6 +94,19 @@ const scubaDivingApp = {
     this.obstaclesArray.push(newObstacle);
   },
 
+  createNewBubble() {
+    let bubbleSize = Math.random()*20 + 5
+    const newBubble = new Bubble(
+      this.ctx,
+      bubbleSize,
+      bubbleSize,
+      this.dimensionCanvas,
+      this.newPlayer.playerPosition.x + 140,
+      this.speed
+    );
+    this.bubblesArray.push(newBubble);
+  },
+
   createNewLive() {
     const xRandomPosition = Math.trunc(Math.random() * this.dimensionCanvas.w);
     const newLive = new Live(
@@ -124,8 +142,8 @@ const scubaDivingApp = {
 
     this.newPlayer.draw();
     this.appearTreasure();
-    // this.newTreasure.draw();
     this.obstaclesArray.forEach((obstacle) => obstacle.draw());
+    this.bubblesArray.forEach((bubble) => bubble.draw());
     this.livesArray.forEach((live) => live.draw());
     this.showScores();
   },
@@ -225,6 +243,9 @@ const scubaDivingApp = {
         }
 
   },
+  
+
+  
 
   showScores() {
     //   let scoreInput = document.getElementByClassname('score')
