@@ -5,11 +5,12 @@ class Player{
         this.playerWidth = width;
         this.playerHeight = height;
         this.dimensionCanvas = dimensionCanvas;
-        this.speed = 20,
-        //new image
+        this.moveLeft = false;
+        this.moveRight = false;
+        this.moveUp = false;
+        this.moveDown = false;
         this.playerImage = new Image ();
         this.playerImage.src = '/images/player.png';        
-        //Initial position for the player
         this.playerPosition = {
             x: 30,
             y: this.dimensionCanvas.h/2 - this.playerHeight/2,
@@ -26,20 +27,11 @@ class Player{
         );
     }
 
-    moveUp(){
-        this.playerPosition.y -= this.speed;
-    }
-
-    moveDown(){
-        this.playerPosition.y += this.speed;
-    }
-
-    moveRight(){
-        this.playerPosition.x += this.speed;
-    }
-
-    moveLeft(){
-        this.playerPosition.x -= this.speed;
+    move(){
+        this.playerPosition.x <= this.dimensionCanvas.w - 175 && this.moveRight ? this.playerPosition.x +=3 : null
+        this.playerPosition.x >= 0 && this.moveLeft ? this.playerPosition.x -= 3: null
+        this.playerPosition.y >= 0 && this.moveUp ? this.playerPosition.y -= 3 : null
+        this.playerPosition.y <= this.dimensionCanvas.h - 80 && this.moveDown ? this.playerPosition.y +=3 : null
     }
 
 

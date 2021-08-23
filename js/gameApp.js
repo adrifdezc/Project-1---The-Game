@@ -38,7 +38,8 @@ const scubaDivingApp = {
     this.disappearTresure();
     this.clearCanvas();
     this.drawAll();
-
+    this.newPlayer.move();
+    
     this.framesCounter++;
     if (this.framesCounter % 200 === 0) {
       this.score++;
@@ -62,16 +63,16 @@ const scubaDivingApp = {
 
   setListeners() {
     window.addEventListener("keydown", (e) => {
-      e.code === "ArrowUp" ? this.newPlayer.moveUp() : null;
-      e.code === "ArrowDown" ? this.newPlayer.moveDown() : null;
-      e.code === "ArrowRight" ? this.newPlayer.moveRight() : null;
-      e.code === "ArrowLeft" ? this.newPlayer.moveLeft() : null;
+      e.code === "ArrowUp" ? this.newPlayer.moveUp= true : null;
+      e.code === "ArrowDown" ? this.newPlayer.moveDown= true : null;
+      e.code === "ArrowRight" ? this.newPlayer.moveRight = true: null;
+      e.code === "ArrowLeft" ? this.newPlayer.moveLeft = true : null;
     });
     document.addEventListener("keyup", (e) => {
-      e.code === "ArrowUp" ? this.newPlayer.moveUp() : null;
-      e.code === "ArrowDown" ? this.newPlayer.moveDown() : null;
-      e.code === "ArrowRight" ? this.newPlayer.moveRight() : null;
-      e.code === "ArrowLeft" ? this.newPlayer.moveLeft() : null;
+      e.code === "ArrowUp" ? this.newPlayer.moveUp=false: null;
+      e.code === "ArrowDown" ? this.newPlayer.moveDown=false : null;
+      e.code === "ArrowRight" ? this.newPlayer.moveRight=false : null;
+      e.code === "ArrowLeft" ? this.newPlayer.moveLeft=false : null;
     });
   },
 
@@ -101,16 +102,16 @@ const scubaDivingApp = {
     this.livesArray.push(newLive);
   },
 
-  createNewTreasure() {
+  createNewTreasure(){
     this.newTreasure = new Treasure(
       this.ctx,
       100,
       100,
       this.dimensionCanvas,
       880,
-      200
-    );
-  },
+      200,
+      )
+    },  
 
   drawAll() {
     this.ctx.drawImage(
@@ -193,28 +194,36 @@ const scubaDivingApp = {
     }
   },
 
-  appearTreasure() {
-    if (this.score > 20) {
+  appearTreasure(){
+    if (this.score > 0) {
       this.newTreasure.draw();
     }
   },
 
-  disappearTresure() {
+  disappearTresure(){
     let frontalCollision =
-      this.newPlayer.playerPosition.x <
-      900 + this.newTreasure.treasureWidth - 10;
-    let upperCollision =
-      this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 > 900;
-    let downCollision =
-      this.newPlayer.playerPosition.y <
-      200 + this.newTreasure.treasureHeight - 10;
-    let backCollision =
-      this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y > 200;
+          this.newPlayer.playerPosition.x <
+          900 + this.newTreasure.treasureWidth - 10;
+        let upperCollision =
+          this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 >
+          900;
+        let downCollision =
+          this.newPlayer.playerPosition.y <
+          200 + this.newTreasure.treasureHeight - 10;
+        let backCollision =
+          this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y >
+          200;
 
-    if (frontalCollision && upperCollision && downCollision && backCollision) {
-      alert("You found the treasure");
-      cancelAnimationFrame();
-    }
+        if (
+          frontalCollision &&
+          upperCollision &&
+          downCollision &&
+          backCollision
+        ) {
+          alert ('You found the treasure')
+          cancelAnimationFrame();
+        }
+
   },
 
   showScores() {
