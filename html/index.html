@@ -9,20 +9,33 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="shortcut icon" href="#"> <!--Was giving an error and google said to do this-->
   </head>
-  <body>     
-    <div class="container" id="game-board"> 
-        <div class="">
-          <div class="">
-            <!-- <button class="start-button"> <img src="/images/pngkey.com-replay-button-png-4592206.png" alt=""> </button> -->
-          </div>
-          <div class="">
-            <canvas id="canvas"></canvas>
-          </div>
-        </div>
+  <body> 
+    <nav>
+      <ul>
+        <li>
+        <button id="start-button">
+          START GAME
+          <span></span><span></span><span></span><span></span>
+        </button>       
+      </li>
+             <li>
+               <button>
+           INSTRUCTIONS<span></span><span></span><span></span><span></span>
+          </button>
+            </li>
+        <li>
+          <button>
+          MUSIC
+          <span></span><span></span><span></span><span></span>
+        </button>
+        </li>
+      </ul>
+      <div class="start">
+        <!-- <button class="start-button">START GAME</button> -->
+      </div>
+    </nav>    
     
-                 
-      
-    </div>
+            <canvas id="canvas" class="canvas"></canvas>
 
     <script src="/js/bubbles.js"></script>
     <script src="/js/shark.js"></script>

@@ -8,12 +8,13 @@ const scubaDivingApp = {
   winningSound: undefined,
   lifeSound: undefined,
   newPlayer: undefined,
+  gameOverImage: undefined,
   framesCounter: 0,
   obstaclesArray: [],
   livesArray: [],
   bubblesArray: [],
   sharkArray:[],
-  speed: 3,
+  speed: 2,
   score: 0,
   o2Reserve: 10,
 
@@ -33,8 +34,8 @@ const scubaDivingApp = {
   },
 
   setDimensions(elementCanvas) {
-    this.dimensionCanvas.w = 1000;
-    this.dimensionCanvas.h = 550;
+    this.dimensionCanvas.w = 850;
+    this.dimensionCanvas.h = 465;
     elementCanvas.setAttribute("width", this.dimensionCanvas.w);
     elementCanvas.setAttribute("height", this.dimensionCanvas.h);
   },
@@ -42,7 +43,11 @@ const scubaDivingApp = {
   createBackground(){
     this.backgroundImage = new Image();
     this.backgroundImage.src = "../background2.jpeg";
-
+  },
+  createGameOverScreen(){
+    this.gameOverImage= new Image();
+    this.gameOverImage.src = "/images/GameOver.jpeg"
+    this.ctx.drawImage(this.gameOverImage, 0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h)
   },
 
   refreshScreen() {
@@ -52,7 +57,7 @@ const scubaDivingApp = {
     this.checkSharkCollision()
     this.checkForBottles();
     this.disappearTresure();
-    this.clearCanvas();
+    this.gameOver();
     this.drawAll();
     this.newPlayer.move();
 
@@ -80,7 +85,7 @@ const scubaDivingApp = {
   },
 
   createNewPlayer() {
-    this.newPlayer = new Player(this.ctx, 175, 80, this.dimensionCanvas);
+    this.newPlayer = new Player(this.ctx, 150, 69, this.dimensionCanvas);
   },
 
   setListeners() {
@@ -103,8 +108,8 @@ const scubaDivingApp = {
     const yRandomPosition = Math.trunc(Math.random() * this.dimensionCanvas.h);
     const newObstacle = new Obstacle(
       this.ctx,
-      80,
-      100,
+      75,
+      87,
       this.dimensionCanvas,
       yRandomPosition - 50,
       this.speed / 1.5
@@ -126,7 +131,7 @@ const scubaDivingApp = {
       150,
       this.dimensionCanvas,
       yRandomPosition - 50,
-      this.speed / 1.5
+      this.speed / 2
     );
     if(this.sharkArray.length < 20){
       this.sharkArray.push(newShark);      
@@ -138,7 +143,7 @@ const scubaDivingApp = {
   },
 
   createNewBubble() {
-    let bubbleSize = Math.random() * 20 + 5;
+    let bubbleSize = Math.random() * 15 + 5;
     const newBubble = new Bubble(
       this.ctx,
       bubbleSize,
@@ -159,8 +164,8 @@ const scubaDivingApp = {
     const xRandomPosition = Math.trunc(Math.random() * this.dimensionCanvas.w);
     const newLive = new Live(
       this.ctx,
-      100,
-      80,
+      90,
+      70,
       this.dimensionCanvas,
       xRandomPosition -100 ,
       this.speed / 2
@@ -174,8 +179,8 @@ const scubaDivingApp = {
       100,
       100,
       this.dimensionCanvas,
-      880,
-      425,
+      730,
+      335,
     );
   },
 
@@ -187,10 +192,9 @@ const scubaDivingApp = {
       this.dimensionCanvas.w,
       this.dimensionCanvas.h
     );
-
     this.newPlayer.draw();
     this.appearTreasure();
-    this.endGame()
+    this.outOfOxygen()
     this.obstaclesArray.forEach((obstacle) => obstacle.draw());
     this.bubblesArray.forEach((bubble) => bubble.draw());
     this.livesArray.forEach((live) => live.draw());
@@ -198,8 +202,8 @@ const scubaDivingApp = {
     this.showScores();
   },
 
-  clearCanvas() {
-    this.ctx.clearRect(0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h);
+  gameOver() {
+    this.createGameOverScreen();
   },
 
   checkCollision() {
@@ -226,7 +230,9 @@ const scubaDivingApp = {
           upperCollision
         ) {
           // alert("Game Over"); //SOMETHING NICE HERE
+          // this.newPlayer.playerPosition.y += 30
           this.collisionSound.play();
+          this.gameOver();
           cancelAnimationFrame();
            }
       });
@@ -257,6 +263,8 @@ const scubaDivingApp = {
           upperCollision
         ) {
           this.collisionSound.play();
+          // this.newPlayer.playerPosition.y += 30
+          this.gameOver();
           cancelAnimationFrame();
            }
       });
@@ -295,11 +303,11 @@ const scubaDivingApp = {
   },
 
   appearTreasure() {
-    if (this.score > 0) {
+    if (this.score > 5) {
       this.newTreasure.draw();
     }
   },
-  endGame(){
+  outOfOxygen(){
     if (this.o2Reserve <0){
       alert('Out of o2');
       cancelAnimationFrame();
@@ -317,12 +325,10 @@ const scubaDivingApp = {
       this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y > this.newTreasure.treasurePositionY;
 
     if (frontalCollision && upperCollision && downCollision && backCollision) {
-      // alert("You found the treasure");
       this.winningSound.play()
-      cancelAnimationFrame();
+      cancelAnimationFrame()
     }
   },
-
   createSounds(){
     this.backgroundSound = new Audio();
     this.backgroundSound.src = "/sounds/560446__migfus20__happy-background-music.mp3"
@@ -340,12 +346,17 @@ const scubaDivingApp = {
   showScores() {
     //   let scoreInput = document.getElementByClassname('score')
 
-    this.ctx.font = "25px fantasy";
+    this.ctx.font = "20px fantasy";
     this.ctx.fillStyle = "white";
-    this.ctx.fillText("Score:   " + this.score, 850, 80);
+    this.ctx.fillText("Score:   " + this.score, 720, 80);
 
-    this.ctx.font = "25px fantasy";
+    this.ctx.font = "20px fantasy";
     this.ctx.fillStyle = "white";
-    this.ctx.fillText("O2 Reserve:   " + this.o2Reserve, 785, 50);
+    this.ctx.fillText("O2 Reserve:   " + this.o2Reserve, 665, 50);
   },
+  
+  // gameOver(){
+  //   this.gameOver()
+  // }
 };
+

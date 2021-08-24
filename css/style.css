@@ -7,20 +7,96 @@ html {
     background-size: cover;
   }
 
-canvas {
+canvas{
   border-width: 30px;
   border-style: groove;
   border-color: goldenrod;
-  position: absolute;
-  top: 50px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
+  position: fixed;  
+  margin: 12% 30%;
 }
 
-button >img{
-  width:300px;
+button{
+  background-color: rgba(15, 49, 122, 0);
+  border: none;
+  color: goldenrod;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+button:hover{
+  color: rgb(15, 49, 122);
+}
+
+
+/* START GAME BUTTON */
+nav ul {
+  /* display: flex; */
+  background-color: rgba(51, 106, 223, 0.849); 
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  left: 8%;
+  top: 35%
+}
+
+nav ul li {
+  --c: goldenrod;
+  color: var(--c);
+  font-size: 16px;
+  border: 1em groove var(--c);
+  border-radius: 0.6em;
+  width: 12em;
+  height: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  margin: 0.2em 0.1em;
+  
+}
+
+nav ul li span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+nav ul li:hover {
+  color: rgb(15, 49, 122);
+}
+
+nav ul li:hover span {
+  transform: translateY(0) scale(2);
+}
+
+nav ul li span:nth-child(1) {
+  --n: 1;
+}
+
+nav ul li span:nth-child(2) {
+  --n: 2;
+}
+
+nav ul li span:nth-child(3) {
+  --n: 3;
+}
+
+nav ul li span:nth-child(4) {
+  --n: 4;
 }
 
 
