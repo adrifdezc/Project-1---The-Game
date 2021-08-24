@@ -21,3 +21,10 @@ canvas {
   right: 0;
   margin: auto;
 }
+
+button{
+  align-items: 50%;
+}
+.start-button > img{
+ width: 300px;
+}

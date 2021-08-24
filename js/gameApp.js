@@ -2,6 +2,9 @@ const scubaDivingApp = {
   ctx: undefined,
   dimensionCanvas: { w: undefined, h: undefined },
   backgroundImage: undefined,
+  backgroundSound: undefined,
+  collisionSound: undefined,
+  lifeSound: undefined,
   newPlayer: undefined,
   framesCounter: 0,
   obstaclesArray: [],
@@ -16,9 +19,16 @@ const scubaDivingApp = {
     this.setDimensions(elementCanvas);
     this.backgroundImage = new Image();
     this.backgroundImage.src = "../background2.jpeg";
+    this.backgroundSound = new Audio();
+    this.backgroundSound.src = "/sounds/560446__migfus20__happy-background-music.mp3"
+    this.collisionSound = new Audio();
+    this.collisionSound.src = "/sounds/ouch.mp3"
+    this.lifeSound = new Audio();
+    this.lifeSound.src = "/sounds/428156__higgs01__yay.wav";
     this.createNewPlayer();
     this.setListeners();
     this.refreshScreen();
+
   },
 
   setContext(elementCanvas) {
@@ -33,7 +43,7 @@ const scubaDivingApp = {
   },
 
   refreshScreen() {
-    
+    this.backgroundSound.play(); //UNCOMENT FOR SOUND 
     this.createNewTreasure();
     this.checkCollision();
     this.checkForBottles();
@@ -41,12 +51,12 @@ const scubaDivingApp = {
     this.clearCanvas();
     this.drawAll();
     this.newPlayer.move();
-    
+
     this.framesCounter++;
     if (this.framesCounter % 200 === 0) {
       this.score++;
     }
-    if (this.framesCounter % 80 === 0) {
+    if (this.framesCounter % 30 === 0) {
       this.createNewObstacle();
     }
     if (this.framesCounter % 10 === 0) {
@@ -68,16 +78,16 @@ const scubaDivingApp = {
 
   setListeners() {
     window.addEventListener("keydown", (e) => {
-      e.code === "ArrowUp" ? this.newPlayer.moveUp= true : null;
-      e.code === "ArrowDown" ? this.newPlayer.moveDown= true : null;
-      e.code === "ArrowRight" ? this.newPlayer.moveRight = true: null;
-      e.code === "ArrowLeft" ? this.newPlayer.moveLeft = true : null;
+      e.code === "ArrowUp" ? (this.newPlayer.moveUp = true) : null;
+      e.code === "ArrowDown" ? (this.newPlayer.moveDown = true) : null;
+      e.code === "ArrowRight" ? (this.newPlayer.moveRight = true) : null;
+      e.code === "ArrowLeft" ? (this.newPlayer.moveLeft = true) : null;
     });
     document.addEventListener("keyup", (e) => {
-      e.code === "ArrowUp" ? this.newPlayer.moveUp=false: null;
-      e.code === "ArrowDown" ? this.newPlayer.moveDown=false : null;
-      e.code === "ArrowRight" ? this.newPlayer.moveRight=false : null;
-      e.code === "ArrowLeft" ? this.newPlayer.moveLeft=false : null;
+      e.code === "ArrowUp" ? (this.newPlayer.moveUp = false) : null;
+      e.code === "ArrowDown" ? (this.newPlayer.moveDown = false) : null;
+      e.code === "ArrowRight" ? (this.newPlayer.moveRight = false) : null;
+      e.code === "ArrowLeft" ? (this.newPlayer.moveLeft = false) : null;
     });
   },
 
@@ -85,17 +95,23 @@ const scubaDivingApp = {
     const yRandomPosition = Math.trunc(Math.random() * this.dimensionCanvas.h);
     const newObstacle = new Obstacle(
       this.ctx,
-      85,
-      70,
+      100,
+      100,
       this.dimensionCanvas,
-      yRandomPosition,
+      yRandomPosition - 50,
       this.speed / 1.5
     );
-    this.obstaclesArray.push(newObstacle);
+    if(this.obstaclesArray.length < 7){
+      this.obstaclesArray.push(newObstacle);      
+    }else{
+        this.obstaclesArray.shift()
+      }
+  
+    
   },
 
   createNewBubble() {
-    let bubbleSize = Math.random()*20 + 5
+    let bubbleSize = Math.random() * 20 + 5;
     const newBubble = new Bubble(
       this.ctx,
       bubbleSize,
@@ -104,7 +120,12 @@ const scubaDivingApp = {
       this.newPlayer.playerPosition.x + 140,
       this.speed
     );
+    //Remove some bubbles for better performance
+    if(this.bubblesArray.length < 7){
     this.bubblesArray.push(newBubble);
+    }else{
+      this.bubblesArray.shift()
+    }
   },
 
   createNewLive() {
@@ -114,22 +135,22 @@ const scubaDivingApp = {
       100,
       80,
       this.dimensionCanvas,
-      xRandomPosition,
+      xRandomPosition -100 ,
       this.speed / 2
     );
     this.livesArray.push(newLive);
   },
 
-  createNewTreasure(){
+  createNewTreasure() {
     this.newTreasure = new Treasure(
       this.ctx,
       100,
       100,
       this.dimensionCanvas,
       880,
-      200,
-      )
-    },  
+      200
+    );
+  },
 
   drawAll() {
     this.ctx.drawImage(
@@ -176,8 +197,10 @@ const scubaDivingApp = {
           backCollision
         ) {
           // alert("Game Over"); //SOMETHING NICE HERE
+          this.collisionSound.play();
+          this.backgroundSound.stop();
           cancelAnimationFrame();
-        }
+           }
       });
     }
   },
@@ -205,6 +228,8 @@ const scubaDivingApp = {
           downCollision &&
           backCollision
         ) {
+          this.lifeSound.play();
+
           this.livesArray.splice(0, 1);
           this.o2Reserve += 5;
         }
@@ -212,40 +237,29 @@ const scubaDivingApp = {
     }
   },
 
-  appearTreasure(){
+  appearTreasure() {
     if (this.score > 0) {
       this.newTreasure.draw();
     }
   },
 
-  disappearTresure(){
+  disappearTresure() {
     let frontalCollision =
-          this.newPlayer.playerPosition.x <
-          900 + this.newTreasure.treasureWidth - 10;
-        let upperCollision =
-          this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 >
-          900;
-        let downCollision =
-          this.newPlayer.playerPosition.y <
-          200 + this.newTreasure.treasureHeight - 10;
-        let backCollision =
-          this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y >
-          200;
+      this.newPlayer.playerPosition.x <
+      900 + this.newTreasure.treasureWidth - 10;
+    let upperCollision =
+      this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 > 900;
+    let downCollision =
+      this.newPlayer.playerPosition.y <
+      200 + this.newTreasure.treasureHeight - 10;
+    let backCollision =
+      this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y > 200;
 
-        if (
-          frontalCollision &&
-          upperCollision &&
-          downCollision &&
-          backCollision
-        ) {
-          alert ('You found the treasure')
-          cancelAnimationFrame();
-        }
-
+    if (frontalCollision && upperCollision && downCollision && backCollision) {
+      alert("You found the treasure");
+      cancelAnimationFrame();
+    }
   },
-  
-
-  
 
   showScores() {
     //   let scoreInput = document.getElementByClassname('score')
