@@ -4,9 +4,6 @@
 }
 html { 
     background: url('/css/slotopaint-gamedesign-mermaid3.jpeg') no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
   }
 
@@ -22,9 +19,8 @@ canvas {
   margin: auto;
 }
 
-button{
-  align-items: 50%;
+button >img{
+  width:300px;
 }
-.start-button > img{
- width: 300px;
-}
+
+

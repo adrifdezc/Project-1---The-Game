@@ -5,10 +5,7 @@ class Treasure {
         this.treasureHeight = height
         this.dimensionCanvas = dimensionCanvas
         this.treasurePositionX= positionX
-        this.treasurePositionY = positionY
-            // this.dimensionCanvas.w - this.treasureWidth - 20,
-            // this.dimensionCanvas.h/2 - this.treasureHeight/2
-        
+        this.treasurePositionY = positionY        
         this.treasureImage = new Image();
         this.treasureImage.src = `../images/treasure/treasure.png`;
                                                      //Gets a random image
