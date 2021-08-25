@@ -42,7 +42,7 @@ const scubaDivingApp = {
 
   createBackground() {
     this.backgroundImage = new Image();
-    this.backgroundImage.src = "../background2.jpeg";
+    this.backgroundImage.src = "../images/background2.jpeg";
   },
   createGameOverScreen() {
     this.gameOverImage = new Image();
