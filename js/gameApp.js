@@ -14,7 +14,7 @@ const scubaDivingApp = {
   obstaclesArray: [],
   livesArray: [],
   bubblesArray: [],
-  sharkArray:[],
+  sharkArray: [],
   speed: 2,
   score: 0,
   o2Reserve: 10,
@@ -27,7 +27,6 @@ const scubaDivingApp = {
     this.createNewPlayer();
     this.setListeners();
     this.refreshScreen();
-
   },
 
   setContext(elementCanvas) {
@@ -41,26 +40,38 @@ const scubaDivingApp = {
     elementCanvas.setAttribute("height", this.dimensionCanvas.h);
   },
 
-  createBackground(){
+  createBackground() {
     this.backgroundImage = new Image();
     this.backgroundImage.src = "../background2.jpeg";
   },
-  createGameOverScreen(){
-    this.gameOverImage= new Image();
-    this.gameOverImage.src = "/images/GameOver.jpeg"
-    this.ctx.drawImage(this.gameOverImage, 0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h)
+  createGameOverScreen() {
+    this.gameOverImage = new Image();
+    this.gameOverImage.src = "../images/GameOver.jpeg";
+    this.ctx.drawImage(
+      this.gameOverImage,
+      0,
+      0,
+      this.dimensionCanvas.w,
+      this.dimensionCanvas.h
+    );
   },
-  createWinScreen(){
+  createWinScreen() {
     this.winImage = new Image();
-    this.winImage.src = "/images/WIN.png"
-    this.ctx.drawImage(this.winImage, 0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h)
+    this.winImage.src = "../images/WIN.png";
+    this.ctx.drawImage(
+      this.winImage,
+      0,
+      0,
+      this.dimensionCanvas.w,
+      this.dimensionCanvas.h
+    );
   },
 
   refreshScreen() {
-    this.backgroundSound.play(); //UNCOMENT FOR SOUND 
+    this.backgroundSound.play(); //UNCOMENT FOR SOUND
     this.createNewTreasure();
     this.checkCollision();
-    this.checkSharkCollision()
+    this.checkSharkCollision();
     this.checkForBottles();
     this.disappearTresure();
     this.gameOver();
@@ -75,9 +86,9 @@ const scubaDivingApp = {
     if (this.framesCounter % 50 === 0) {
       this.createNewObstacle();
     }
-    if (this.framesCounter% 500 === 0){
-        this.createNewShark();
-      }
+    if (this.framesCounter % 500 === 0) {
+      this.createNewShark();
+    }
     if (this.framesCounter % 10 === 0) {
       this.createNewBubble();
     }
@@ -97,7 +108,7 @@ const scubaDivingApp = {
 
   setListeners() {
     window.addEventListener("keydown", (e) => {
-      this.movementSound.play() //Sounds when any arrow is pressed.
+      this.movementSound.play(); //Sounds when any arrow is pressed.
       e.code === "ArrowUp" ? (this.newPlayer.moveUp = true) : null;
       e.code === "ArrowDown" ? (this.newPlayer.moveDown = true) : null;
       e.code === "ArrowRight" ? (this.newPlayer.moveRight = true) : null;
@@ -121,13 +132,11 @@ const scubaDivingApp = {
       yRandomPosition - 50,
       this.speed / 1.5
     );
-    if(this.obstaclesArray.length < 7){
-      this.obstaclesArray.push(newObstacle);      
-    }else{
-        this.obstaclesArray.shift()
-      }
-  
-    
+    if (this.obstaclesArray.length < 7) {
+      this.obstaclesArray.push(newObstacle);
+    } else {
+      this.obstaclesArray.shift();
+    }
   },
 
   createNewShark() {
@@ -140,13 +149,11 @@ const scubaDivingApp = {
       yRandomPosition - 50,
       this.speed / 2
     );
-    if(this.sharkArray.length < 20){
-      this.sharkArray.push(newShark);      
-    }else{
-        this.sharkArray.shift()
-      }
-  
-    
+    if (this.sharkArray.length < 20) {
+      this.sharkArray.push(newShark);
+    } else {
+      this.sharkArray.shift();
+    }
   },
 
   createNewBubble() {
@@ -160,10 +167,10 @@ const scubaDivingApp = {
       this.speed
     );
     //Remove some bubbles for better performance
-    if(this.bubblesArray.length < 7){
-    this.bubblesArray.push(newBubble);
-    }else{
-      this.bubblesArray.shift()
+    if (this.bubblesArray.length < 7) {
+      this.bubblesArray.push(newBubble);
+    } else {
+      this.bubblesArray.shift();
     }
   },
 
@@ -174,7 +181,7 @@ const scubaDivingApp = {
       90,
       70,
       this.dimensionCanvas,
-      xRandomPosition -100 ,
+      xRandomPosition - 100,
       this.speed / 2
     );
     this.livesArray.push(newLive);
@@ -187,7 +194,7 @@ const scubaDivingApp = {
       100,
       this.dimensionCanvas,
       730,
-      335,
+      335
     );
   },
 
@@ -201,11 +208,11 @@ const scubaDivingApp = {
     );
     this.newPlayer.draw();
     this.appearTreasure();
-    this.outOfOxygen()
+    this.outOfOxygen();
     this.obstaclesArray.forEach((obstacle) => obstacle.draw());
     this.bubblesArray.forEach((bubble) => bubble.draw());
     this.livesArray.forEach((live) => live.draw());
-    this.sharkArray.forEach((shark)=> shark.draw());
+    this.sharkArray.forEach((shark) => shark.draw());
     this.showScores();
   },
 
@@ -213,7 +220,7 @@ const scubaDivingApp = {
     this.createGameOverScreen();
   },
 
-  winGame(){
+  winGame() {
     this.createWinScreen();
   },
 
@@ -245,7 +252,7 @@ const scubaDivingApp = {
           this.collisionSound.play();
           this.gameOver();
           cancelAnimationFrame();
-           }
+        }
       });
     }
   },
@@ -277,7 +284,7 @@ const scubaDivingApp = {
           // this.newPlayer.playerPosition.y += 30
           this.gameOver();
           cancelAnimationFrame();
-           }
+        }
       });
     }
   },
@@ -318,46 +325,48 @@ const scubaDivingApp = {
       this.newTreasure.draw();
     }
   },
-  outOfOxygen(){
-    if (this.o2Reserve <0){
-      alert('Out of o2');
+  outOfOxygen() {
+    if (this.o2Reserve < 0) {
+      alert("Out of o2");
       cancelAnimationFrame();
     }
   },
   disappearTresure() {
     let frontalCollision =
-      this.newPlayer.playerPosition.x < this.newTreasure.treasurePositionX + this.newTreasure.treasureWidth - 10;
+      this.newPlayer.playerPosition.x <
+      this.newTreasure.treasurePositionX + this.newTreasure.treasureWidth - 10;
     let upperCollision =
-      this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 > this.newTreasure.treasurePositionX;
+      this.newPlayer.playerPosition.x + this.newPlayer.playerWidth - 10 >
+      this.newTreasure.treasurePositionX;
     let downCollision =
       this.newPlayer.playerPosition.y <
       this.newTreasure.treasurePositionY + this.newTreasure.treasureHeight - 10;
     let backCollision =
-      this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y > this.newTreasure.treasurePositionY;
+      this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y >
+      this.newTreasure.treasurePositionY;
 
     if (frontalCollision && upperCollision && downCollision && backCollision) {
-      this.lifeSound.play()
-      this.winningSound.play()
-      this.winGame()
-      cancelAnimationFrame()
+      this.lifeSound.play();
+      this.winningSound.play();
+      this.winGame();
+      cancelAnimationFrame();
     }
   },
-  createSounds(){
+  createSounds() {
     this.backgroundSound = new Audio();
-    this.backgroundSound.src = "/sounds/560446__migfus20__happy-background-music.mp3"
+    this.backgroundSound.src =
+      "../sounds/560446__migfus20__happy-background-music.mp3";
     this.collisionSound = new Audio();
-    this.collisionSound.src = "/sounds/oh-oh.wav"
+    this.collisionSound.src = "../sounds/oh-oh.wav";
     this.movementSound = new Audio();
-    this.movementSound.src = "/sounds/bubbles.wav"
+    this.movementSound.src = "../sounds/bubbles.wav";
     this.lifeSound = new Audio();
-    this.lifeSound.src = "/sounds/428156__higgs01__yay.wav";
+    this.lifeSound.src = "../sounds/428156__higgs01__yay.wav";
     this.winningSound = new Audio();
-    this.winningSound.src = "/sounds/win.mp3"
-
+    this.winningSound.src = "../sounds/win.mp3";
   },
 
   showScores() {
-
     this.ctx.font = "20px fantasy";
     this.ctx.fillStyle = "white";
     this.ctx.fillText("Score:   " + this.score, 720, 80);
@@ -366,6 +375,4 @@ const scubaDivingApp = {
     this.ctx.fillStyle = "white";
     this.ctx.fillText("O2 Reserve:   " + this.o2Reserve, 665, 50);
   },
-  
 };
-

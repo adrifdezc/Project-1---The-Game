@@ -9,7 +9,7 @@ class Bubble {
         y: scubaDivingApp.newPlayer.playerPosition.y + 30,
       };
       this.bubbleImage = new Image();
-      this.bubbleImage.src = "/images/bubbles/bubble.png";
+      this.bubbleImage.src = "../images/bubbles/bubble.png";
       this.speed = speed;
     }
   

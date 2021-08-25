@@ -10,7 +10,7 @@ class Player{
         this.moveUp = false;
         this.moveDown = false;
         this.playerImage = new Image ();
-        this.playerImage.src = '/images/player.png';        
+        this.playerImage.src = '../images/player.png';        
         this.playerPosition = {
             x: 30,
             y: this.dimensionCanvas.h/2 - this.playerHeight/2,
