@@ -48,7 +48,7 @@ const scubaDivingApp = {
   createGameOverScreen() {
     this.gameOverImage = new Image();
     this.gameOverImage.src =
-      "https://adrifdezc.github.io/Project1-Game/images/GameOver.jpeg";
+      "https://adrifdezc.github.io/Project1-Game/images/GameOver.png";
     this.ctx.drawImage(
       this.gameOverImage,
       0,
@@ -328,6 +328,7 @@ const scubaDivingApp = {
 
   outOfOxygen() {
     if (this.o2Reserve < 0) {
+      this.collisionSound.play();
       this.gameOver();
       cancelAnimationFrame();
     }
