@@ -4,7 +4,7 @@ window.onload = () => {
     //change innerHTML to show the parchment (pergamino)
     document.getElementById(
       "logo"
-    ).innerHTML = `<img src="../images/parchment.png" class="parchment" alt="">`;
+    ).innerHTML = `<img src="https://adrifdezc.github.io/Project1-Game/images/parchment.png" class="parchment" alt="">`;
     //when clicking on instructions
     document.getElementById("instructions").onclick = () => {
       location.reload();

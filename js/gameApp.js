@@ -42,11 +42,13 @@ const scubaDivingApp = {
 
   createBackground() {
     this.backgroundImage = new Image();
-    this.backgroundImage.src = "../images/background2.jpeg";
+    this.backgroundImage.src =
+      "https://adrifdezc.github.io/Project1-Game/images/background2.jpeg";
   },
   createGameOverScreen() {
     this.gameOverImage = new Image();
-    this.gameOverImage.src = "../images/GameOver.jpeg";
+    this.gameOverImage.src =
+      "https://adrifdezc.github.io/Project1-Game/images/GameOver.jpeg";
     this.ctx.drawImage(
       this.gameOverImage,
       0,
@@ -57,7 +59,8 @@ const scubaDivingApp = {
   },
   createWinScreen() {
     this.winImage = new Image();
-    this.winImage.src = "../images/WIN.png";
+    this.winImage.src =
+      "https://adrifdezc.github.io/Project1-Game/images/WIN.png";
     this.ctx.drawImage(
       this.winImage,
       0,
@@ -355,15 +358,19 @@ const scubaDivingApp = {
   createSounds() {
     this.backgroundSound = new Audio();
     this.backgroundSound.src =
-      "../sounds/560446__migfus20__happy-background-music.mp3";
+      "https://adrifdezc.github.io/Project1-Game/sounds/560446__migfus20__happy-background-music.mp3";
     this.collisionSound = new Audio();
-    this.collisionSound.src = "../sounds/oh-oh.wav";
+    this.collisionSound.src =
+      "https://adrifdezc.github.io/Project1-Game/sounds/oh-oh.wav";
     this.movementSound = new Audio();
-    this.movementSound.src = "../sounds/bubbles.wav";
+    this.movementSound.src =
+      "https://adrifdezc.github.io/Project1-Game/sounds/bubbles.wav";
     this.lifeSound = new Audio();
-    this.lifeSound.src = "../sounds/428156__higgs01__yay.wav";
+    this.lifeSound.src =
+      "https://adrifdezc.github.io/Project1-Game/sounds/428156__higgs01__yay.wav";
     this.winningSound = new Audio();
-    this.winningSound.src = "../sounds/win.mp3";
+    this.winningSound.src =
+      "https://adrifdezc.github.io/Project1-Game/sounds/win.mp3";
   },
 
   showScores() {

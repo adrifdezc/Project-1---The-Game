@@ -7,7 +7,7 @@ class Treasure {
     this.treasurePositionX = positionX;
     this.treasurePositionY = positionY;
     this.treasureImage = new Image();
-    this.treasureImage.src = `../images/treasure/treasure.png`;
+    this.treasureImage.src = `https://adrifdezc.github.io/Project1-Game/images/treasure/treasure.png`;
     //Gets a random image
   }
 
