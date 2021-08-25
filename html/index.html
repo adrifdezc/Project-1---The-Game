@@ -7,35 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ScubaDiving</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="shortcut icon" href="#"> <!--Was giving an error and google said to do this-->
+    <link rel="shortcut icon" href="#"> <!--fix error-->
   </head>
   <body> 
-    <nav>
-      <ul>
-        <li>
+    <div id="game-board">
+    <div id="logo"> 
+      <img src="/images/watersplash.png" class="splash" alt=""> 
+      <img src="/images/GameLogo.png" class="logo-img" alt="Game-logo"> 
+    </div>
+
+    <div class="buttons">
         <button id="start-button">
           START GAME
-          <span></span><span></span><span></span><span></span>
-        </button>       
-      </li>
-             <li>
-               <button>
-           INSTRUCTIONS<span></span><span></span><span></span><span></span>
-          </button>
-            </li>
-        <li>
-          <button>
-          MUSIC
-          <span></span><span></span><span></span><span></span>
         </button>
-        </li>
-      </ul>
+        <button>
+          INSTRUCTIONS
+        </button>       
+     </div>
       <div class="start">
         <!-- <button class="start-button">START GAME</button> -->
       </div>
-    </nav>    
-    
             <canvas id="canvas" class="canvas"></canvas>
+   </div>
+
 
     <script src="/js/bubbles.js"></script>
     <script src="/js/shark.js"></script>

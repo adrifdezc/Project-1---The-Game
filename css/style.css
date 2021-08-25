@@ -8,95 +8,68 @@ html {
   }
 
 canvas{
-  border-width: 30px;
+  /* border-width: 30px;
   border-style: groove;
-  border-color: goldenrod;
+  border-color: goldenrod; */
   position: fixed;  
-  margin: 12% 30%;
+  top: 100px
 }
 
+#game-board{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+#logo{
+  padding-bottom: 100px;
+}
+.logo-img{
+  width: 100%;
+  justify-content: center;
+  position: relative;
+
+}
+.splash{
+  width: 30%;
+  position: absolute;
+  left: 25%;
+  top: 8%;
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+.buttons{
+  align-content: center;
+  position: fixed; 
+  bottom:10%;
+  width: auto;
+}
 button{
-  background-color: rgba(15, 49, 122, 0);
-  border: none;
-  color: goldenrod;
-  font-size: 16px;
-  font-family: sans-serif;
+  padding: 10px;
+  border: 10px groove goldenrod;
+  color: rgb(242, 248, 161);
+  margin: 40px;
+  background-color: rgb(151, 143, 28);
+  font-size: 30px;
+  font-family:fantasy;
   font-weight: bold;
+
 }
+
 button:hover{
-  color: rgb(15, 49, 122);
+  color: rgb(23, 240, 229);
 }
+
 
 
 /* START GAME BUTTON */
-nav ul {
-  /* display: flex; */
-  background-color: rgba(51, 106, 223, 0.849); 
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  left: 8%;
-  top: 35%
-}
 
-nav ul li {
-  --c: goldenrod;
-  color: var(--c);
-  font-size: 16px;
-  border: 1em groove var(--c);
-  border-radius: 0.6em;
-  width: 12em;
-  height: 3em;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-family: sans-serif;
-  letter-spacing: 0.1em;
-  text-align: center;
-  line-height: 3em;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: 0.5s;
-  margin: 0.2em 0.1em;
-  
-}
-
-nav ul li span {
-  position: absolute;
-  width: 25%;
-  height: 100%;
-  background-color: var(--c);
-  transform: translateY(150%);
-  border-radius: 50%;
-  left: calc((var(--n) - 1) * 25%);
-  transition: 0.5s;
-  transition-delay: calc((var(--n) - 1) * 0.1s);
-  z-index: -1;
-}
-
-nav ul li:hover {
-  color: rgb(15, 49, 122);
-}
-
-nav ul li:hover span {
-  transform: translateY(0) scale(2);
-}
-
-nav ul li span:nth-child(1) {
-  --n: 1;
-}
-
-nav ul li span:nth-child(2) {
-  --n: 2;
-}
-
-nav ul li span:nth-child(3) {
-  --n: 3;
-}
-
-nav ul li span:nth-child(4) {
-  --n: 4;
-}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 

@@ -9,6 +9,7 @@ const scubaDivingApp = {
   lifeSound: undefined,
   newPlayer: undefined,
   gameOverImage: undefined,
+  winImage: undefined,
   framesCounter: 0,
   obstaclesArray: [],
   livesArray: [],
@@ -49,6 +50,11 @@ const scubaDivingApp = {
     this.gameOverImage.src = "/images/GameOver.jpeg"
     this.ctx.drawImage(this.gameOverImage, 0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h)
   },
+  createWinScreen(){
+    this.winImage = new Image();
+    this.winImage.src = "/images/WIN.png"
+    this.ctx.drawImage(this.winImage, 0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h)
+  },
 
   refreshScreen() {
     this.backgroundSound.play(); //UNCOMENT FOR SOUND 
@@ -58,6 +64,7 @@ const scubaDivingApp = {
     this.checkForBottles();
     this.disappearTresure();
     this.gameOver();
+    this.winGame();
     this.drawAll();
     this.newPlayer.move();
 
@@ -206,6 +213,10 @@ const scubaDivingApp = {
     this.createGameOverScreen();
   },
 
+  winGame(){
+    this.createWinScreen();
+  },
+
   checkCollision() {
     if (this.obstaclesArray.length) {
       this.obstaclesArray.forEach((danger) => {
@@ -303,7 +314,7 @@ const scubaDivingApp = {
   },
 
   appearTreasure() {
-    if (this.score > 5) {
+    if (this.score >= 0) {
       this.newTreasure.draw();
     }
   },
@@ -325,7 +336,9 @@ const scubaDivingApp = {
       this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y > this.newTreasure.treasurePositionY;
 
     if (frontalCollision && upperCollision && downCollision && backCollision) {
+      this.lifeSound.play()
       this.winningSound.play()
+      this.winGame()
       cancelAnimationFrame()
     }
   },
@@ -344,7 +357,6 @@ const scubaDivingApp = {
   },
 
   showScores() {
-    //   let scoreInput = document.getElementByClassname('score')
 
     this.ctx.font = "20px fantasy";
     this.ctx.fillStyle = "white";
@@ -355,8 +367,5 @@ const scubaDivingApp = {
     this.ctx.fillText("O2 Reserve:   " + this.o2Reserve, 665, 50);
   },
   
-  // gameOver(){
-  //   this.gameOver()
-  // }
 };
 
