@@ -1,27 +1,26 @@
-*{
-    margin:0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-body { 
-    background: url('./slotopaint-gamedesign-mermaid3.jpeg') no-repeat center center fixed; 
-    background-size: cover;
-  }
+body {
+  background: url("https://adrifdezc.github.io/Project1-Game/slotopaint-gamedesign-mermaid3.jpeg")
+    no-repeat center center fixed;
+  background-size: cover;
+}
 
-canvas{
+canvas {
   /* border-width: 30px;
   border-style: groove;
   border-color: goldenrod; */
-  position: fixed;  
-  top: 100px
+  position: fixed;
+  top: 100px;
 }
 
-.parchment{
-
+.parchment {
   width: 50%;
-
 }
 
-#game-board{
+#game-board {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,51 +28,60 @@ canvas{
   text-align: center;
   min-height: 100vh;
 }
-#logo{
+#logo {
   padding-bottom: 100px;
 }
-.logo-img{
+.logo-img {
   width: 100%;
   justify-content: center;
   position: relative;
-
 }
-.splash{
+.splash {
   width: 30%;
   position: absolute;
   left: 25%;
   top: 8%;
-  -webkit-animation:spin 4s linear infinite;
-  -moz-animation:spin 4s linear infinite;
-  animation:spin 4s linear infinite;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
 }
 
-.buttons{
+.buttons {
   align-content: center;
-  position: fixed; 
-  bottom:10%;
+  position: fixed;
+  bottom: 10%;
   width: auto;
 }
-button{
+button {
   padding: 10px;
   border: 10px groove goldenrod;
   color: rgb(242, 248, 161);
   margin: 40px;
   background-color: rgb(151, 143, 28);
   font-size: 30px;
-  font-family:fantasy;
+  font-family: fantasy;
   font-weight: bold;
-
 }
 
-button:hover{
+button:hover {
   color: rgb(23, 240, 229);
 }
 
 /* START GAME BUTTON */
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
-
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
