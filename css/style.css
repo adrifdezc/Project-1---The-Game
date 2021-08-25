@@ -2,7 +2,7 @@
     margin:0;
     padding: 0;
 }
-html { 
+body { 
     background: url('../css/slotopaint-gamedesign-mermaid3.jpeg') no-repeat center center fixed; 
     background-size: cover;
   }
