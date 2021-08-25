@@ -72,6 +72,7 @@ const scubaDivingApp = {
 
   refreshScreen() {
     this.backgroundSound.play(); //UNCOMENT FOR SOUND
+    this.outOfOxygen();
     this.createNewTreasure();
     this.checkCollision();
     this.checkSharkCollision();
@@ -211,7 +212,6 @@ const scubaDivingApp = {
     );
     this.newPlayer.draw();
     this.appearTreasure();
-    this.outOfOxygen();
     this.obstaclesArray.forEach((obstacle) => obstacle.draw());
     this.bubblesArray.forEach((bubble) => bubble.draw());
     this.livesArray.forEach((live) => live.draw());
@@ -250,8 +250,6 @@ const scubaDivingApp = {
           downCollision &&
           upperCollision
         ) {
-          // alert("Game Over"); //SOMETHING NICE HERE
-          // this.newPlayer.playerPosition.y += 30
           this.collisionSound.play();
           this.gameOver();
           cancelAnimationFrame();
@@ -284,7 +282,6 @@ const scubaDivingApp = {
           upperCollision
         ) {
           this.collisionSound.play();
-          // this.newPlayer.playerPosition.y += 30
           this.gameOver();
           cancelAnimationFrame();
         }
@@ -328,9 +325,10 @@ const scubaDivingApp = {
       this.newTreasure.draw();
     }
   },
+
   outOfOxygen() {
     if (this.o2Reserve < 0) {
-      alert("Out of o2");
+      this.gameOver();
       cancelAnimationFrame();
     }
   },
