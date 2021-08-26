@@ -96,7 +96,7 @@ const scubaDivingApp = {
     if (this.framesCounter % 200 === 0) {
       this.score++;
     }
-    if (this.framesCounter % 40 === 0) {
+    if (this.framesCounter % 35 === 0) {
       this.createNewObstacle();
     }
     if (this.framesCounter % 500 === 0) {
@@ -161,7 +161,7 @@ const scubaDivingApp = {
     this.bubblesArray = [];
     this.score = 0;
     this.o2Reserve = 10;
-    this.speed = 2;
+    this.speed = 4;
     this.framesCounter = 0;
   },
 
