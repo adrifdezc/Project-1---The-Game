@@ -401,8 +401,9 @@ const scubaDivingApp = {
     this.ctx.font = "30px fantasy";
     this.ctx.fillStyle = "white";
     this.ctx.fillText("Score:   " + this.score, 40, 50);
+    
     this.liveImage = new Image();
-    this.liveImage.src = "/images/lives/oxy1.png";
+    this.liveImage.src = "https://adrifdezc.github.io/Project1-Game/images/lives/oxy1.png";
 
     if (this.o2Reserve >= 8) {
       this.ctx.drawImage(
