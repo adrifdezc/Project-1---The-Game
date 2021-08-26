@@ -15,7 +15,7 @@ const scubaDivingApp = {
   livesArray: [],
   bubblesArray: [],
   sharkArray: [],
-  speed: 2,
+  speed: 4,
   score: 0,
   o2Reserve: 10,
 
@@ -343,7 +343,7 @@ const scubaDivingApp = {
   },
 
   appearTreasure() {
-    if (this.score >= 10) {
+    if (this.score >= 20) {
       this.newTreasure.draw();
     }
   },
