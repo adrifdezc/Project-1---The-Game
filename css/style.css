@@ -3,12 +3,16 @@
   padding: 0;
 }
 body {
-  background: url("./slotopaint-gamedesign-mermaid3.jpeg") no-repeat center
-    center fixed;
+  background: url("https://adrifdezc.github.io/Project1-Game/slotopaint-gamedesign-mermaid3.jpeg")
+    no-repeat center center fixed;
   background-size: cover;
 }
 
-canvas {
+.canvas {
+  border: 20px groove goldenrod;
+}
+
+#canvas-border {
   /* border-width: 30px;
   border-style: groove;
   border-color: goldenrod; */
@@ -31,40 +35,79 @@ canvas {
 #logo {
   padding-bottom: 100px;
 }
+
 .logo-img {
   width: 100%;
   justify-content: center;
   position: relative;
 }
 .splash {
-  width: 30%;
+  width: 18%;
   position: absolute;
-  left: 25%;
-  top: 8%;
+  left: 31%;
+  top: 19%;
   -webkit-animation: spin 4s linear infinite;
   -moz-animation: spin 4s linear infinite;
   animation: spin 4s linear infinite;
 }
 
 .buttons {
+  display: flex;
   align-content: center;
   position: fixed;
-  bottom: 10%;
+  bottom: 3%;
   width: auto;
+  vertical-align: baseline;
 }
-button {
-  padding: 10px;
-  border: 10px groove goldenrod;
-  color: rgb(242, 248, 161);
-  margin: 40px;
-  background-color: rgb(151, 143, 28);
-  font-size: 30px;
-  font-family: fantasy;
-  font-weight: bold;
+#audiocontrol {
+  margin-top: 10px;
+}
+#inst {
+  margin-bottom: 18px;
+}
+#startgame {
+  margin-top: 7px;
+}
+#restart {
+  margin-top: 10px;
 }
 
-button:hover {
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+  background-color: blue;
+  color: white;
+}
+
+button {
+  /* padding: 10px; */
+  border: none;
+  /* border: 10px groove goldenrod; */
+  /* color: rgb(242, 248, 161);
+  border: none;
+  display: inline-block;*/
+  margin: 0 20px;
+  background-color: rgba(151, 143, 28, 0);
+  font-size: 30px;
   color: rgb(23, 240, 229);
+  font-family: fantasy;
+  font-weight: bolder;
+}
+button img {
+  width: 250px;
+}
+
+button img:hover {
+  animation: bounce 2s;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: goldenrod;
+  color: white;
+  text-align: center;
 }
 
 /* START GAME BUTTON */
@@ -83,5 +126,25 @@ button:hover {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  60%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
   }
 }

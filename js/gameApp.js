@@ -45,6 +45,7 @@ const scubaDivingApp = {
     this.backgroundImage.src =
       "https://adrifdezc.github.io/Project1-Game/images/background2.jpeg";
   },
+
   createGameOverScreen() {
     this.gameOverImage = new Image();
     this.gameOverImage.src =
@@ -56,7 +57,15 @@ const scubaDivingApp = {
       this.dimensionCanvas.w,
       this.dimensionCanvas.h
     );
+    this.ctx.font = "25px fantasy";
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(
+      "Final score:   " + this.score,
+      this.dimensionCanvas.w / 2 - 80,
+      this.dimensionCanvas.h / 2 + 90
+    );
   },
+
   createWinScreen() {
     this.winImage = new Image();
     this.winImage.src =
@@ -71,7 +80,7 @@ const scubaDivingApp = {
   },
 
   refreshScreen() {
-    this.backgroundSound.play(); //UNCOMENT FOR SOUND
+    // this.backgroundSound.play(); //UNCOMENT FOR SOUND
     this.outOfOxygen();
     this.createNewTreasure();
     this.checkCollision();
@@ -141,6 +150,19 @@ const scubaDivingApp = {
     } else {
       this.obstaclesArray.shift();
     }
+  },
+
+  clearCanvas() {
+    this.ctx.clearRect(0, 0, this.dimensionCanvas.w, this.dimensionCanvas.h);
+    cancelAnimationFrame("canvas");
+    this.livesArray = [];
+    this.sharkArray = [];
+    this.obstaclesArray = [];
+    this.bubblesArray = [];
+    this.score = 0;
+    this.o2Reserve = 10;
+    this.speed = 2;
+    this.framesCounter = 0;
   },
 
   createNewShark() {
@@ -321,7 +343,7 @@ const scubaDivingApp = {
   },
 
   appearTreasure() {
-    if (this.score >= 0) {
+    if (this.score >= 10) {
       this.newTreasure.draw();
     }
   },
@@ -347,7 +369,13 @@ const scubaDivingApp = {
       this.newPlayer.playerHeight - 10 + this.newPlayer.playerPosition.y >
       this.newTreasure.treasurePositionY;
 
-    if (frontalCollision && upperCollision && downCollision && backCollision) {
+    if (
+      frontalCollision &&
+      upperCollision &&
+      downCollision &&
+      backCollision &&
+      this.score > 9
+    ) {
       this.lifeSound.play();
       this.winningSound.play();
       this.winGame();
@@ -355,9 +383,6 @@ const scubaDivingApp = {
     }
   },
   createSounds() {
-    this.backgroundSound = new Audio();
-    this.backgroundSound.src =
-      "https://adrifdezc.github.io/Project1-Game/sounds/560446__migfus20__happy-background-music.mp3";
     this.collisionSound = new Audio();
     this.collisionSound.src =
       "https://adrifdezc.github.io/Project1-Game/sounds/oh-oh.wav";
@@ -373,12 +398,57 @@ const scubaDivingApp = {
   },
 
   showScores() {
-    this.ctx.font = "20px fantasy";
+    this.ctx.font = "30px fantasy";
     this.ctx.fillStyle = "white";
-    this.ctx.fillText("Score:   " + this.score, 720, 80);
+    this.ctx.fillText("Score:   " + this.score, 40, 50);
+    this.liveImage = new Image();
+    this.liveImage.src = "/images/lives/oxy1.png";
 
-    this.ctx.font = "20px fantasy";
-    this.ctx.fillStyle = "white";
-    this.ctx.fillText("O2 Reserve:   " + this.o2Reserve, 665, 50);
+    if (this.o2Reserve >= 8) {
+      this.ctx.drawImage(
+        this.liveImage,
+        this.dimensionCanvas.w - 120,
+        12,
+        100,
+        75
+      );
+      this.ctx.drawImage(
+        this.liveImage,
+        this.dimensionCanvas.w - 160,
+        12,
+        100,
+        75
+      );
+      this.ctx.drawImage(
+        this.liveImage,
+        this.dimensionCanvas.w - 200,
+        12,
+        100,
+        75
+      );
+    } else if (this.o2Reserve >= 3) {
+      this.ctx.drawImage(
+        this.liveImage,
+        this.dimensionCanvas.w - 120,
+        12,
+        100,
+        75
+      );
+      this.ctx.drawImage(
+        this.liveImage,
+        this.dimensionCanvas.w - 160,
+        12,
+        100,
+        75
+      );
+    } else {
+      this.ctx.drawImage(
+        this.liveImage,
+        this.dimensionCanvas.w - 120,
+        12,
+        100,
+        75
+      );
+    }
   },
 };

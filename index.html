@@ -13,6 +13,16 @@
     <!--fix error-->
   </head>
   <body>
+    <div id="audio">
+      <audio
+        src="https://adrifdezc.github.io/Project1-Game/sounds/560446__migfus20__happy-background-music.mp3"
+        class="audio"
+        type="audio/mp3"
+        autoplay
+      >
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
     <div id="game-board">
       <div id="logo">
         <img
@@ -28,14 +38,40 @@
       </div>
 
       <div class="buttons">
-        <button id="start-button">START GAME</button>
-        <button id="instructions">INSTRUCTIONS</button>
+        <div id="startgame">
+          <button type="submit" id="start-button">
+            <img
+              src="https://adrifdezc.github.io/Project1-Game/images/startbutton.png"
+              alt=""
+            />
+          </button>
+        </div>
+        <div id="inst">
+          <button type="submit" id="instructions">
+            <img
+              src="https://adrifdezc.github.io/Project1-Game/images/instructions-button.png"
+              alt=""
+            />
+          </button>
+        </div>
+        <div id="restart"></div>
+        <div id="audiocontrol">
+          <button type="submit" id="soundoff">
+            <img
+              src="https://adrifdezc.github.io/Project1-Game/images/soundoff.png"
+              alt=""
+            />
+          </button>
+        </div>
       </div>
-      <div class="start">
-        <!-- <button class="start-button">START GAME</button> -->
+
+      <div id="canvas-border">
+        <!-- <canvas id="canvas" class="canvas"></canvas> -->
       </div>
-      <canvas id="canvas" class="canvas"></canvas>
     </div>
+    <!-- <div class="footer">
+      <p>by Adrian Fernandez</p>
+    </div> -->
 
     <script src="https://adrifdezc.github.io/Project1-Game/js/bubbles.js"></script>
     <script src="https://adrifdezc.github.io/Project1-Game/js/shark.js"></script>
