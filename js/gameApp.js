@@ -96,7 +96,7 @@ const scubaDivingApp = {
     if (this.framesCounter % 200 === 0) {
       this.score++;
     }
-    if (this.framesCounter % 50 === 0) {
+    if (this.framesCounter % 40 === 0) {
       this.createNewObstacle();
     }
     if (this.framesCounter % 500 === 0) {
@@ -401,9 +401,10 @@ const scubaDivingApp = {
     this.ctx.font = "30px fantasy";
     this.ctx.fillStyle = "white";
     this.ctx.fillText("Score:   " + this.score, 40, 50);
-    
+
     this.liveImage = new Image();
-    this.liveImage.src = "https://adrifdezc.github.io/Project1-Game/images/lives/oxy1.png";
+    this.liveImage.src =
+      "https://adrifdezc.github.io/Project1-Game/images/lives/oxy1.png";
 
     if (this.o2Reserve >= 8) {
       this.ctx.drawImage(
