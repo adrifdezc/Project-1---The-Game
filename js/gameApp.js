@@ -15,7 +15,7 @@ const scubaDivingApp = {
   livesArray: [],
   bubblesArray: [],
   sharkArray: [],
-  speed: 4,
+  speed: 2,
   score: 0,
   o2Reserve: 10,
 
@@ -96,7 +96,7 @@ const scubaDivingApp = {
     if (this.framesCounter % 200 === 0) {
       this.score++;
     }
-    if (this.framesCounter % 35 === 0) {
+    if (this.framesCounter % 50 === 0) {
       this.createNewObstacle();
     }
     if (this.framesCounter % 500 === 0) {
@@ -161,7 +161,7 @@ const scubaDivingApp = {
     this.bubblesArray = [];
     this.score = 0;
     this.o2Reserve = 10;
-    this.speed = 4;
+    this.speed = 2;
     this.framesCounter = 0;
   },
 
@@ -343,7 +343,7 @@ const scubaDivingApp = {
   },
 
   appearTreasure() {
-    if (this.score >= 20) {
+    if (this.score >= 10) {
       this.newTreasure.draw();
     }
   },
