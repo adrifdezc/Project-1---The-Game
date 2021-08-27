@@ -3,8 +3,9 @@ window.onload = () => {
   document.getElementById("instructions").onclick = () => {
     let button1 = document.querySelector("#logo img");
     console.log(button1);
+    setTimeout(() => {
     if (button1.classList.contains("splash")) {
-      document.getElementById(
+        document.getElementById(
         "logo"
       ).innerHTML = `<img src="https://adrifdezc.github.io/Project1-Game/images/parchment.png" class="parchment" alt="">`;
     } else {
@@ -12,6 +13,9 @@ window.onload = () => {
         "logo"
       ).innerHTML = `<img src="https://adrifdezc.github.io/Project1-Game/images/watersplash.png" class="splash" alt="Splash" />
       <img src="https://adrifdezc.github.io/Project1-Game/images/GameLogo.png" class="logo-img" alt="Game logo" />`;
+    }
+  
+      }, 1000);
     }
   };
 

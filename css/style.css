@@ -100,14 +100,10 @@ button img:hover {
   animation: bounce 2s;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: goldenrod;
-  color: white;
-  text-align: center;
+
+a{
+  color: inherit;
+  text-decoration: none !important;
 }
 
 /* START GAME BUTTON */
