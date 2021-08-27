@@ -13,8 +13,8 @@ window.onload = () => {
       ).innerHTML = `<img src="https://adrifdezc.github.io/Project1-Game/images/watersplash.png" class="splash" alt="Splash" />
       <img src="https://adrifdezc.github.io/Project1-Game/images/GameLogo.png" class="logo-img" alt="Game logo" />`;
     }
-    }
-  };
+    };
+  
 
   //remove sound
   document.getElementById("audiocontrol").onclick = () => {
